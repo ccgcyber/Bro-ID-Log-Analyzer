@@ -9,8 +9,8 @@ from datetime import datetime as time
 def plot_dns_http (connection):
     connection.DBquery.exec_("select ts,uid,uri from http")
     while connection.DBquery.next():
-        print(connection.DBquery.values())
-        connection.DBquery.exec_("select answer from dns_answers where answer='resp_h' ")
+        print(connection.DBquery.value(0),connection.DBquery.value(1),connection.DBquery.value(2))
+        # connection.DBquery.exec_("select answer from dns_answers where answer='resp_h' ")
 
     #
     #
