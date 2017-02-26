@@ -46,6 +46,7 @@ import hashlib, codecs, operator, sqlite3, os,time
 from REGEX import REGEXP
 from ssl_subject import ssl_subjects_pie
 from httpStatusPie import plot_http_status_pir
+from plot_HTTP_DNS_trace import plot_dns_http
 
 from SMTPfiles import smtp_files
 class PlotCanvas(FigureCanvas):
@@ -536,6 +537,9 @@ class Ui_MainWindow(object):  # Qt and PYUIC creator generated functions and cla
         elif self.comboBox_2.currentText() == 'smtp and files relation':  #completed and tested
             page = smtp_files(connection)
 
+        elif self.comboBox_2.currentText() == ('DNS and HTTP relation'):
+            page = plot_dns_http(connection)
+
         if self.comboBox_2.currentText() !=('files statistics'):
             self.webview.load(QUrl('file://' + os.getcwd() + '/%s' % page))
             self.analysis.setCurrentIndex(3)
@@ -730,6 +734,9 @@ class Ui_MainWindow(object):  # Qt and PYUIC creator generated functions and cla
                     self.comboBox_2.addItem('weird bars')
             if 'smtp' and 'files' in table:
                 self.comboBox_2.addItem('smtp and files relation')
+
+            if 'dns' and 'http' in table:
+                self.comboBox_2.addItem('DNS and HTTP relation')
 
             self.comboBox.setEnabled(True)
             self.comboBox_2.setEnabled(True)
